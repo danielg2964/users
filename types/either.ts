@@ -1,5 +1,3 @@
-import type { Failure } from "./failure.ts";
-
 export class Either<TLeft, TRight> {
   private constructor(left: TLeft | null, right: TRight | null) {
     if (left !== null) {
