@@ -1,0 +1,26 @@
+{
+  "name": "users",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./src/main.ts",
+  "type": "module",
+  "scripts": {
+    "start": "node --experimental-strip-types --disable-warning=ExperimentalWarning --env-file=./.env .",
+    "start:watch": "node --experimental-strip-types --disable-warning=ExperimentalWarning --env-file=./.env --watch .",
+    "test": "node --experimental-strip-types --disable-warning=ExperimentalWarning --test ./tests/**/**.test.ts",
+    "test:watch": "node --experimental-strip-types --disable-warnings=ExperimentalWarning --watch --test ./tests/**/**.test.ts"
+  },
+  "imports": {
+    "#domain/*": "./src/domain/*",
+    "#application/*": "./src/application/*",
+    "#infrastructure/*": "./src/infrastructure/*",
+    "#types/*": "./types/*"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@faker-js/faker": "9.8.0",
+    "@types/node": "24.0.3"
+  }
+}
