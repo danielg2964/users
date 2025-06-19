@@ -1,20 +1,19 @@
-import type { Entity } from "#domain/shared/entity.ts";
-import { Uuid } from "#domain/shared/uuid.ts";
-import { UserEntity } from "#domain/users/entities/user.entity.ts";
-import { UserEmail } from "#domain/users/user.email.ts";
-import { UserPassword } from "#domain/users/user.password.ts";
-
-function tests(entity: Entity) {
-
-  console.log(entity);
-}
+import { createApp } from "#infrastructure/app.ts";
+import { connectToMongo } from "#infrastructure/db/mongo.db.ts";
 
 export async function main() {
-  tests(new UserEntity(
-    new Uuid("asdfasdfasd"),
-    new UserEmail("asdfasdf", true),
-    new UserPassword("asdfasfdsa"))
-  );
+  await connectToMongo();
+
+  const app = await createApp();
+
+  const port = Number(process.env["PORT"] || 3000);
+
+  const connection = await app.listen({ port });
+
+  const routes = app.printRoutes();
+
+  console.log(routes);
+  console.log(connection);
 }
 
 await main();
