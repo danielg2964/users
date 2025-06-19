@@ -22,6 +22,9 @@ export class UpdateUserController {
       body.email === null
       ? Maybe.nothing()
       : Maybe.some(body.email),
+      body.has_verified_email === null
+      ? Maybe.nothing()
+      : Maybe.some(body.has_verified_email),
       body.password === null
       ? Maybe.nothing()
       : Maybe.some(body.password)
