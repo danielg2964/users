@@ -12,6 +12,9 @@ export type AppInstance = Awaited<ReturnType<typeof createApp>>
 export async function createApp() {
   const app = fastify();
 
+  app.register(import("@fastify/swagger"));
+  app.register(import("@fastify/swagger-ui"), { routePrefix: "/docs" });
+
   const hasher = new Argon2Hasher();
   const uuid_generator = new UuidUuidGenerator();
 
