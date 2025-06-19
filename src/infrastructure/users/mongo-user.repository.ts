@@ -4,7 +4,7 @@ import { UserEntity } from "#domain/users/entities/user.entity.ts";
 import { UserEmail } from "#domain/users/user.email.ts";
 import { UserPassword } from "#domain/users/user.password.ts";
 import { Maybe } from "#types/maybe.ts";
-import type { Collection, WithId } from "mongodb";
+import { ReturnDocument, type Collection, type WithId } from "mongodb";
 
 export class MongoUserRepository implements UserRepository {
   constructor(collection: Collection<UserEntity>) {
@@ -32,7 +32,11 @@ export class MongoUserRepository implements UserRepository {
   }
 
   async save(entity: UserEntity): Promise<UserEntity> {
-    const result = await this.#collection.findOneAndReplace({ "uuid.value": { $eq: entity.uuid.value } }, entity, { upsert: true });
+    const result = await this.#collection.findOneAndReplace(
+      { "uuid.value": { $eq: entity.uuid.value } }, 
+      entity,
+      { upsert: true, returnDocument: ReturnDocument.AFTER
+    });
 
     if (result === null) {
       return entity;
