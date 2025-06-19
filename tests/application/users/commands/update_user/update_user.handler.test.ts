@@ -26,6 +26,7 @@ describe("UpdatUserHandler Test", () => {
   const command = new UpdateUserCommand(
     user_uuid,
     Maybe.some(new_user_email),
+    Maybe.some(true),
     Maybe.some(new_user_password)
   );
 
@@ -112,7 +113,7 @@ describe("UpdatUserHandler Test", () => {
     saveMock.mock.mockImplementationOnce(async user => {
       assert.equal(user.uuid.value, user_uuid);
       assert.equal(user.email.value, command.email.value);
-      assert.equal(user.email.is_verified, false);
+      assert.equal(user.email.is_verified, command.has_verified_email.value);
       assert.equal(user.password.value, hash_faked);
 
       user_saved = user;

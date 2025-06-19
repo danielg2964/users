@@ -29,7 +29,7 @@ export class UpdateUserHandler {
 
     const user_finded = user_finded_result.value;
 
-    let email_value = user_finded.email.value;
+    let user_email = user_finded.email;
     if (command.email.has_value) {
       const email_in_use_result = await this.#user_repository.findByEmail(command.email.value);
 
@@ -37,15 +37,8 @@ export class UpdateUserHandler {
         return Either.right(UserFailures.EMAIL_IN_USE);
       }
 
-      email_value = command.email.value;
+      user_email = new UserEmail(command.email.value, false);
     }
-
-    let has_verified_email = user_finded.email.is_verified;
-    if (command.has_verified_email.has_value) {
-      has_verified_email = command.has_verified_email.value;
-    }
-
-    const user_email = new UserEmail(email_value, has_verified_email);
 
     let user_password = user_finded.password;
     if (command.password.has_value) {
