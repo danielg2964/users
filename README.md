@@ -52,7 +52,7 @@ Durante el desarrollo de este pequeño proyecto, aprendí y apliqué lo siguient
 
   Cuando se construyen objetos que reciben tipos primitivos en su constructor, pueden surgir errores al pasar argumentos, especialmente desde estructuras como los DTOs. Por ejemplo, es posible pasar un valor incorrecto pero del mismo tipo, como asignar la contraseña en lugar del correo electrónico, sin que TypeScript lo detecte como error.
 
-  Para prevenir este tipo de fallos, utilicé varios *Value Objects* en las entidades del dominio. Además, implementé un getter asociado a un `unique symbol` (los getters no afectan la serialización del objeto en la base de datos) con el objetivo de evitar que TypeScript permita pasar instancias de diferentes clases que tengan el mismo *shape*. Esta solución me pareció efectiva y cómoda de implementar, aunque sea más vebosa.
+  Para prevenir este tipo de fallos, utilicé varios *Value Objects* en las entidades del dominio. Además, implementé un getter asociado a un `unique symbol` (los getters no afectan la serialización del objeto en la base de datos) con el objetivo de evitar que TypeScript permita pasar instancias de diferentes clases que tengan el mismo *shape*. Esta solución me pareció efectiva y cómoda de implementar, aunque sea más verbosa.
 
 - **Posible Mejora: Patrón Unit of Work**
 
