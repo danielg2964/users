@@ -1,9 +1,13 @@
 import { MongoClient } from "mongodb";
 import type { Entity } from "#domain/shared/entity.ts";
 
-const client = new MongoClient(process.env["MONGO_URI"]!);
+const host = process.env["MONGO_HOST"] ?? "localhost";
 
-const db_name = "users";
+const port = Number(process.env["MONGO_PORT"] ?? 27017);
+
+const db_name = process.env["MONGO_DB"] ?? "users"
+
+const client = new MongoClient(`mongodb://${host}:${port}`);
 
 export async function connectToMongo() {
   await client.connect();

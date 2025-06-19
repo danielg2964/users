@@ -8,7 +8,9 @@ export async function main() {
 
   const port = Number(process.env["PORT"] || 3000);
 
-  const connection = await app.listen({ port });
+  const host = process.env["HOST"] || "localhost";
+
+  const connection = await app.listen({ port, path: host });
 
   const routes = app.printRoutes();
 
